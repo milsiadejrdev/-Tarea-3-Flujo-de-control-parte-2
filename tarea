@@ -1,0 +1,74 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Estudiante {
+    string nombre;
+    float nota1, nota2, nota3, nota4;
+    float promedio;
+    string estatus;
+};
+
+int main() {
+    int n;
+    vector<Estudiante> estudiantes;
+
+    cout << "=========================================" << endl;
+    cout << "   SISTEMA DE CALIFICACIONES ESTUDIANTIL " << endl;
+    cout << "=========================================" << endl;
+    cout << "Ingrese la cantidad de estudiantes: ";
+    cin >> n;
+    cin.ignore();
+
+    for (int i = 0; i < n; i++) {
+        Estudiante e;
+        cout << "\n--- Estudiante " << (i + 1) << " ---" << endl;
+        cout << "Nombre: ";
+        getline(cin, e.nombre);
+        cout << "Nota 1: ";
+        cin >> e.nota1;
+        cout << "Nota 2: ";
+        cin >> e.nota2;
+        cout << "Nota 3: ";
+        cin >> e.nota3;
+        cout << "Nota 4: ";
+        cin >> e.nota4;
+        cin.ignore();
+
+        e.promedio = (e.nota1 + e.nota2 + e.nota3 + e.nota4) / 4.0;
+        e.estatus = (e.promedio >= 70) ? "Aprobado" : "Reprobado";
+        estudiantes.push_back(e);
+    }
+
+    cout << "\n";
+    cout << "==========================================================================" << endl;
+    cout << left
+        << setw(20) << "Estudiante"
+        << setw(8) << "Nota1"
+        << setw(8) << "Nota2"
+        << setw(8) << "Nota3"
+        << setw(8) << "Nota4"
+        << setw(12) << "Promedio"
+        << setw(10) << "Estatus"
+        << endl;
+    cout << "==========================================================================" << endl;
+
+    for (const auto& e : estudiantes) {
+        cout << left
+            << setw(20) << e.nombre
+            << setw(8) << fixed << setprecision(2) << e.nota1
+            << setw(8) << e.nota2
+            << setw(8) << e.nota3
+            << setw(8) << e.nota4
+            << setw(12) << e.promedio
+            << setw(10) << e.estatus
+            << endl;
+    }
+
+    cout << "==========================================================================" << endl;
+
+    return 0;
+}
